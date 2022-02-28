@@ -1,8 +1,8 @@
 // This file is under GNU General Public License 3.0
 // see LICENSE.txt
 
-#ifndef LIBPEPADAPTER_PEPLOG_HH
-#define LIBPEPADAPTER_PEPLOG_HH
+#ifndef LIBPEPCXX11_PEPLOG_HH
+#define LIBPEPCXX11_PEPLOG_HH
 
 // getpid
 // Linux - unistd.h
@@ -225,4 +225,4 @@ namespace pEp {
 } // namespace pEp
 
 
-#endif // LIBPEPADAPTER_PEPLOG_HH
+#endif // LIBPEPCXX11_PEPLOG_HH

@@ -1,8 +1,8 @@
 // This file is under GNU General Public License 3.0
 // see LICENSE.txt
 
-#ifndef LIBPEPADAPTER_STD_UTILS_HXX
-#define LIBPEPADAPTER_STD_UTILS_HXX
+#ifndef LIBPEPCXX11_STD_UTILS_HXX
+#define LIBPEPCXX11_STD_UTILS_HXX
 
 #include <sstream>
 #include <fstream>
@@ -94,4 +94,4 @@ namespace pEp {
 
     } // namespace Utils
 } // namespace pEp
-#endif // LIBPEPADAPTER_STD_UTILS_HXX
+#endif // LIBPEPCXX11_STD_UTILS_HXX

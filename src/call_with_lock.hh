@@ -1,8 +1,8 @@
 // This file is under GNU General Public License 3.0
 // see LICENSE.txt
 
-#ifndef LIBPEPADAPTER_CALL_WITH_LOCK_HH
-#define LIBPEPADAPTER_CALL_WITH_LOCK_HH
+#ifndef LIBPEPCXX11_CALL_WITH_LOCK_HH
+#define LIBPEPCXX11_CALL_WITH_LOCK_HH
 
 #include <mutex>
 
@@ -23,4 +23,4 @@ namespace pEp {
 
 } // namespace pEp
 
-#endif // LIBPEPADAPTER_CALL_WITH_LOCK_HH
+#endif // LIBPEPCXX11_CALL_WITH_LOCK_HH

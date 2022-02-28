@@ -1,8 +1,8 @@
 // This file is under GNU General Public License 3.0
 // see LICENSE.txt
 
-#ifndef LIBPEPADAPTER_CONSTANT_TIME_ALGO_HH
-#define LIBPEPADAPTER_CONSTANT_TIME_ALGO_HH
+#ifndef LIBPEPCXX11_CONSTANT_TIME_ALGO_HH
+#define LIBPEPCXX11_CONSTANT_TIME_ALGO_HH
 
 #include <string>
 
@@ -16,4 +16,4 @@ namespace pEp {
 
 } // end of namespace pEp
 
-#endif // LIBPEPADAPTER_CONSTANT_TIME_ALGO_HH
+#endif // LIBPEPCXX11_CONSTANT_TIME_ALGO_HH

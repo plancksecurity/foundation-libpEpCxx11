@@ -1,8 +1,8 @@
 // This file is under GNU General Public License 3.0
 // see LICENSE.txt
 
-#ifndef LIBPEPADAPTER_LOCKED_QUEUE_HH
-#define LIBPEPADAPTER_LOCKED_QUEUE_HH
+#ifndef LIBPEPCXX11_LOCKED_QUEUE_HH
+#define LIBPEPCXX11_LOCKED_QUEUE_HH
 
 #include <deque>
 #include <condition_variable>
@@ -177,4 +177,4 @@ namespace utility {
 
 } // end of namespace utility
 
-#endif // LIBPEPADAPTER_LOCKED_QUEUE_HH
+#endif // LIBPEPCXX11_LOCKED_QUEUE_HH
