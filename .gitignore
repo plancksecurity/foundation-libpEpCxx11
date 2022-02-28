@@ -1,0 +1,8 @@
+*.o
+*.a
+*.d
+*.swp
+*~
+ws
+local.conf
+/.idea/
