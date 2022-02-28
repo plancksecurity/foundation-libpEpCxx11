@@ -1,8 +1,22 @@
 *.o
 *.a
 *.d
+*.dSYM
+*.db
 *.swp
 *~
 ws
 local.conf
 /.idea/
+/test/test_rw.bin
+/test/test_counting_semaphore
+/test/test_inspect
+/test/test_semaphore
+/test/test_std_utils
+
+
+.DS_Store
+# Windows
+build-windows/Debug/
+build-windows/Release/
+build-windows/libpEpAdapter.vcxproj.user
