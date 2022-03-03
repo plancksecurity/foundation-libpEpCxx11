@@ -13,10 +13,11 @@ local.conf
 /test/test_inspect
 /test/test_semaphore
 /test/test_std_utils
+/test/test_pc_container
 
 
 .DS_Store
 # Windows
 build-windows/Debug/
 build-windows/Release/
-build-windows/libpEpAdapter.vcxproj.user
+build-windows/libpEpCxx11.vcxproj.user
