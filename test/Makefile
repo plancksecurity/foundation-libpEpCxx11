@@ -7,7 +7,7 @@ include ../Makefile.conf
 
 CXXFLAGS:=-I../src $(CXXFLAGS)
 LDFLAGS:=-L../src $(LDFLAGS)
-LDLIBS=-lstdc++ -lpEpAdapter #-lpthread -ldl -lm
+LDLIBS=-lstdc++ -lpEpCxx11 -lpthread -lm
 CXXFLAGS:=-I../src $(CXXFLAGS)
 
 # Test
