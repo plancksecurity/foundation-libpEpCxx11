@@ -170,8 +170,7 @@ namespace pEp {
             auto ss = ostringstream{};
             ifstream input_file(filename);
             if (!input_file.is_open()) {
-                runtime_error e{ "Could not open the file: " + filename };
-                exit(EXIT_FAILURE);
+                throw runtime_error ("Could not open the file: " + filename);
             }
             ss << input_file.rdbuf();
             return ss.str();
