@@ -203,6 +203,8 @@ namespace pEp {
             public:
                 pEpLogger() = delete;
                 pEpLogger(const std::string& classname, const bool& enabled);
+                pEpLogger(const pEpLogger& rhs);
+                pEpLogger& operator=(const pEpLogger& rhs);
                 // Print a logging message in the format "thread - classname[instancename] - <msg>"
                 void log(const std::string& msg, Utils::Color col = Utils::Color::WHITE) const;
                 // Prints just "<msg>"
@@ -215,10 +217,10 @@ namespace pEp {
                 std::string get_instancename() const;
 
             private:
-                static int auto_instance_nr;
-                bool is_enabled;
-                std::string classname;
-                std::string instancename;
+                static int _auto_instance_nr;
+                bool _is_enabled;
+                std::string _classname;
+                std::string _instancename;
             };
         } // namespace pEpLog
     }     // namespace Adapter

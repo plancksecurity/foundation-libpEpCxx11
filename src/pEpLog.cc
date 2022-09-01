@@ -13,7 +13,7 @@
     #include <android/log.h>
 #endif
 
-using namespace std;
+//using namespace std;
 
 namespace pEp {
     namespace Adapter {
@@ -21,8 +21,8 @@ namespace pEp {
             int line_width = 120;
 
             // NON CLASS
-            mutex mtx;
-            atomic_bool is_enabled{ false };
+            std::mutex mtx;
+            std::atomic_bool is_enabled{ false };
 
             void set_enabled(const bool& enabled)
             {
@@ -35,52 +35,52 @@ namespace pEp {
             }
 
             // Common "print" function implementing the actual "backends"
-            void _log(const string& msg, Utils::Color col = Utils::Color::WHITE)
+            void _log(const std::string& msg, Utils::Color col = Utils::Color::WHITE)
             {
-                lock_guard<mutex> l(mtx);
+                std::lock_guard<std::mutex> l(mtx);
 #ifdef ANDROID
                 __android_log_print(ANDROID_LOG_DEBUG, "pEpDebugLog", "%s", msg.c_str());
 #else
-                cerr << Utils::to_termcol(col) << msg << Utils::to_termcol(Utils::Color::RESET)
-                     << endl; //endl also flushes, but cerr is unbuffered anyways
+                std::cerr << Utils::to_termcol(col) << msg << Utils::to_termcol(Utils::Color::RESET)
+                          << std::endl; //endl also flushes, but cerr is unbuffered anyways
 #endif
             }
 
-            void log(const string& msg, Utils::Color col)
+            void log(const std::string& msg, Utils::Color col)
             {
                 _log(msg, col);
             }
 
-            void logH1(const string& msg, Utils::Color col)
+            void logH1(const std::string& msg, Utils::Color col)
             {
                 log(decorate_three_lines(msg, '='), col);
             }
 
-            void logH2(const string& msg, Utils::Color col)
+            void logH2(const std::string& msg, Utils::Color col)
             {
                 log("\n" + decorate_centered(msg, '='), col);
             }
 
-            void logH3(const string& msg, Utils::Color col)
+            void logH3(const std::string& msg, Utils::Color col)
             {
                 log(decorate_centered(msg, '-'), col);
             }
 
-            string decorate_three_lines(const string& msg, char decoration)
+            std::string decorate_three_lines(const std::string& msg, char decoration)
             {
-                stringstream tmp;
-                tmp << std::string(line_width, decoration) << endl
-                    << msg << endl
+                std::stringstream tmp;
+                tmp << std::string(line_width, decoration) << std::endl
+                    << msg << std::endl
                     << std::string(line_width, decoration);
                 return tmp.str();
             }
 
-            string decorate_centered(const string& msg, char decoration)
+            std::string decorate_centered(const std::string& msg, char decoration)
             {
-                stringstream tmp;
+                std::stringstream tmp;
                 size_t max_len = line_width - 10;
                 // truncate msg
-                string msg_truncated = msg;
+                std::string msg_truncated = msg;
                 if (msg.length() >= max_len) {
                     msg_truncated = msg.substr(0, max_len);
                     msg_truncated += "...";
@@ -104,54 +104,73 @@ namespace pEp {
         namespace pEpLog {
             // Class pEpLogger
 
-            int pEpLogger::auto_instance_nr = 0;
-            pEpLogger::pEpLogger(const string& classname, const bool& enabled) :
-                classname(classname), is_enabled(enabled)
+            int pEpLogger::_auto_instance_nr = 0;
+            pEpLogger::pEpLogger(const std::string& classname, const bool& enabled) :
+                _is_enabled(enabled),
+                _classname(classname)
             {
-                auto_instance_nr++;
-                this->set_instancename(to_string(auto_instance_nr));
+                _auto_instance_nr++;
+                set_instancename(std::to_string(_auto_instance_nr));
             }
 
-            void pEpLogger::log(const string& msg, Utils::Color col) const
+            pEpLogger::pEpLogger(const pEpLogger& rhs) :
+                _is_enabled{ rhs._is_enabled },
+                _classname{ rhs._classname },
+                _instancename{ rhs._instancename }
+            {
+                _auto_instance_nr++;
+                set_instancename(std::to_string(_auto_instance_nr));
+            }
+
+            pEpLogger& pEpLogger::operator=(const pEpLogger& rhs)
+            {
+                _is_enabled = rhs._is_enabled;
+                _classname = rhs._classname;
+                _auto_instance_nr++;
+                set_instancename(std::to_string(_auto_instance_nr));
+                return *this;
+            }
+
+            void pEpLogger::log(const std::string& msg, Utils::Color col) const
             {
                 std::stringstream msg_;
                 msg_ << "[" << getpid() << " " << std::this_thread::get_id() << "]";
                 msg_ << " - ";
-                msg_ << this->get_classname() << "[" << this->get_instancename() << "]";
+                msg_ << get_classname() << "[" << get_instancename() << "]";
                 msg_ << " - " << msg;
-                this->logRaw(msg_.str(), col);
+                logRaw(msg_.str(), col);
             }
 
-            void pEpLogger::logRaw(const string& msg, Utils::Color col) const
+            void pEpLogger::logRaw(const std::string& msg, Utils::Color col) const
             {
-                if (this->is_enabled) {
+                if (_is_enabled) {
                     _log(msg, col);
                 }
             }
 
             void pEpLogger::set_enabled(const bool& enabled)
             {
-                this->is_enabled = enabled;
+                _is_enabled = enabled;
             }
 
             bool pEpLogger::get_enabled() const
             {
-                return this->is_enabled;
+                return _is_enabled;
             }
 
-            string pEpLogger::get_classname() const
+            std::string pEpLogger::get_classname() const
             {
-                return this->classname;
+                return _classname;
             }
 
-            void pEpLogger::set_instancename(const string& name)
+            void pEpLogger::set_instancename(const std::string& name)
             {
-                this->instancename = name;
+                _instancename = name;
             }
 
-            string pEpLogger::get_instancename() const
+            std::string pEpLogger::get_instancename() const
             {
-                return this->instancename;
+                return _instancename;
             }
         } // namespace pEpLog
     }     // namespace Adapter
