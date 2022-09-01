@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cctype>
+#include <cassert>
 #include "../src/inspect.hh"
 #include <pEp/utils.hh>
 #include <pEp/pEpLog.hh>
