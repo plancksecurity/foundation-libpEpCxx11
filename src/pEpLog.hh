@@ -12,9 +12,10 @@
 #ifdef WIN32
     #include <process.h>
     // TODO: once this works, move this to pEpEngine platform_windows.h and file a PR
-    #ifndef getpid
-        #define getpid() _getpid()
+    #ifdef getpid
+        #undef getpid
     #endif
+    #define getpid() _getpid()
 
 #else
     #include <unistd.h>
