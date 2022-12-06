@@ -137,11 +137,20 @@ namespace utility {
             _cv.notify_one();
         }
 
-        void emplace_back(const T& data)
+        void emplace_back(const T&& data)
         {
             {
                 Lock L(_mtx);
                 _q.emplace_back(data);
+            }
+            _cv.notify_one();
+        }
+
+        void emplace_front(const T&& data)
+        {
+            {
+                Lock L(_mtx);
+                _q.emplace_front(data);
             }
             _cv.notify_one();
         }
