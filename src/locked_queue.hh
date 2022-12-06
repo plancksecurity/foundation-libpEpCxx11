@@ -146,6 +146,15 @@ namespace utility {
             _cv.notify_one();
         }
 
+        void emplace_front(const T&& data)
+        {
+            {
+                Lock L(_mtx);
+                _q.emplace_front(data);
+            }
+            _cv.notify_one();
+        }
+
         void push_front(const T& data)
         {
             {
