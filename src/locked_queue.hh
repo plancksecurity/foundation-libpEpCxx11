@@ -137,20 +137,22 @@ namespace utility {
             _cv.notify_one();
         }
 
-        void emplace_back(const T&& data)
+        template< class... Args >
+        void emplace_back( Args&&... args )
         {
             {
                 Lock L(_mtx);
-                _q.emplace_back(data);
+                _q.emplace_back( std::forward<Args>(args)... );
             }
             _cv.notify_one();
         }
 
-        void emplace_front(const T&& data)
+        template< class... Args >
+        void emplace_front( Args&&... args )
         {
             {
                 Lock L(_mtx);
-                _q.emplace_front(data);
+                _q.emplace_front( std::forward<Args>(args)... );
             }
             _cv.notify_one();
         }
