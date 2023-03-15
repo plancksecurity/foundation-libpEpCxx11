@@ -13,8 +13,6 @@
     #include <android/log.h>
 #endif
 
-//using namespace std;
-
 namespace pEp {
     namespace Adapter {
         namespace pEpLog {
@@ -26,7 +24,14 @@ namespace pEp {
 
             void set_enabled(const bool& enabled)
             {
-                is_enabled.store(enabled);
+                if (enabled && !get_enabled()) {
+                    is_enabled.store(true);
+                    pEpLog("pEpLog enabled...");
+                }
+                if (!enabled && get_enabled()) {
+                    pEpLog("pEpLog disabled...");
+                    is_enabled.store(false);
+                }
             }
 
             bool get_enabled()
