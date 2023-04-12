@@ -26,10 +26,8 @@ namespace pEp {
             {
                 if (enabled && !get_enabled()) {
                     is_enabled.store(true);
-                    pEpLog("pEpLog enabled...");
                 }
                 if (!enabled && get_enabled()) {
-                    pEpLog("pEpLog disabled...");
                     is_enabled.store(false);
                 }
             }
