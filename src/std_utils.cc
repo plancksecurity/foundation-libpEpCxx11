@@ -369,8 +369,13 @@ namespace pEp {
 
         unsigned char random_char(unsigned char min, unsigned char max)
         {
+#ifdef WIN32
+            std::uniform_int_distribution<int> dis(min, max);
+            return (unsigned char)dis(gen);
+#else
             std::uniform_int_distribution<unsigned char> dis(min, max);
             return dis(gen);
+#endif
         }
 
         std::string random_string(unsigned char min, unsigned char max, int len)
